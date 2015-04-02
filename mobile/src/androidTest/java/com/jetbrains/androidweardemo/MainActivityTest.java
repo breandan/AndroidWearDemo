@@ -1,14 +1,14 @@
 package com.jetbrains.androidweardemo;
 
-import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.runner.AndroidJUnit4;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.*;
 
 /**
  * Created by breandan on 4/1/2015.
@@ -21,6 +21,12 @@ public class MainActivityTest {
 
     @Test
     public void launchesMainScreen() {
-        onView(withText("Hello world!")).check(ViewAssertions.matches(isDisplayed()));
+        onView(withText("Hello world!")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void displaysHello() {
+        onView(withId(R.id.hello_button)).perform(click());
+        onView(withText("Hello there!")).check(matches(isDisplayed()));
     }
 }
